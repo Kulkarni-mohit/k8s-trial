@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fastapi-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: trialk8s.local
+    http:
+      paths:
+      - path: /namaste
+        pathType: Prefix
+        backend:
+          service:
+            name: app1-service
+            port:
+              number: 8000
+      - path: /hello
+        pathType: Prefix
+        backend:
+          service:
+            name: app2-service
+            port:
+              number: 8000
+      - path: /halo
+        pathType: Prefix
+        backend:
+          service:
+            name: app3-service
+            port:
+              number: 8000
